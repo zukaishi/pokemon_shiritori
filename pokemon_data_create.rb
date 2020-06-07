@@ -12,7 +12,14 @@ pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2
 # Todo 一行で完了させる
 pokemon_list.map!{|x| x.rindex("♂")? x.gsub("♂","オス") : x}
 pokemon_list.map!{|x| x.rindex("♀")? x.gsub("♀","メス") : x}
+# 捨て仮名を普通のカタカナ変換
+pokemon_list.map!{|x| x.rindex("ァ")? x.gsub("ァ","ア") : x}
+pokemon_list.map!{|x| x.rindex("ィ")? x.gsub("ィ","イ") : x}
+pokemon_list.map!{|x| x.rindex("ゥ")? x.gsub("ゥ","ウ") : x}
+pokemon_list.map!{|x| x.rindex("ェ")? x.gsub("ェ","エ") : x}
+pokemon_list.map!{|x| x.rindex("ォ")? x.gsub("ォ","オ") : x}
 puts JSON.pretty_generate(pokemon_list.uniq)
+p pokemon_list
 
 # 開始、終了となるポケモンの名前を受け取る
 puts "ポケモン２匹を半角スペース区切りで入力してください"
