@@ -3,17 +3,25 @@ require 'open-uri'
 require 'nokogiri'
 require 'json'
 
+# wikiからポケモン一覧を取得する
 DATA_URL="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7"
 html = URI.open(DATA_URL).read
 doc = Nokogiri::HTML.parse(html)
-list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
+pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
 
 # Todo 一行で完了させる
-list.map!{|x| x.rindex("♂")? x.gsub("♂","オス") : x}
-list.map!{|x| x.rindex("♀")? x.gsub("♀","メス") : x}
-puts JSON.pretty_generate(list.uniq)
+pokemon_list.map!{|x| x.rindex("♂")? x.gsub("♂","オス") : x}
+pokemon_list.map!{|x| x.rindex("♀")? x.gsub("♀","メス") : x}
+puts JSON.pretty_generate(pokemon_list.uniq)
 
-# Todo 開始、終了となるポケモンの名前を受け取る
+# 開始、終了となるポケモンの名前を受け取る
+puts "ポケモン２匹を半角スペース区切りで入力してください"
+pokemons = gets.split(' ')
+# Todo 処理を綺麗にする
+if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
+  p exit
+end
+
 # Todo　ァなどの文字を、アに置き換える　list + 受け取った２つの名前を
 # Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
 # Todo ンで終わっているポケモンを除外する
