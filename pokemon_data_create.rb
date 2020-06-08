@@ -29,7 +29,6 @@ if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) th
   p exit
 end
 
-# Todo　ァなどの文字を、アに置き換える　list + 受け取った２つの名前を
 # Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
 # Todo ンで終わっているポケモンを除外する
 # Todo 開始ポケモンの最後の文字を、最初とするポケモンを探し出す
