@@ -26,10 +26,17 @@ pokemon_list.map!{|x| x.rindex("ォ")? x.gsub("ォ","オ") : x}
 # 開始、終了となるポケモンの名前を受け取る
 puts "ポケモン２匹を半角スペース区切りで入力してください"
 pokemons = gets.split(' ')
-# Todo 処理を綺麗にする
+# 入力されたポケモンが存在するか
 if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
-#  p exit
+  p exit
 end
+# 開始、終了のポケモンを除外する
+pokemon_list = pokemon_list.reject {|v| v == pokemons[0]}
+pokemon_list = pokemon_list.reject {|v| v == pokemons[1]}
+
+# しりとり開始
+pokemon_list2 = pokemon_list.reject {|v| v[0] != pokemons[0][0]}
+puts JSON.pretty_generate(pokemon_list2.uniq)
 
 # Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
 
