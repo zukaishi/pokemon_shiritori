@@ -33,10 +33,15 @@ end
 # 開始、終了のポケモンを除外する
 pokemon_list = pokemon_list.reject {|v| v == pokemons[0]}
 pokemon_list = pokemon_list.reject {|v| v == pokemons[1]}
+target_p = pokemons[0]
 
 # しりとり開始
-pokemon_list2 = pokemon_list.reject {|v| v[0] != pokemons[0][0]}
-puts JSON.pretty_generate(pokemon_list2.uniq)
+for i in 0...10
+  pokemon_list2 = pokemon_list.reject {|v| v[0] != target_p[-1]}
+  puts target_p
+  puts JSON.pretty_generate(pokemon_list2.uniq)
+  target_p = pokemon_list2[rand(0...pokemon_list2.count)]
+end
 
 # Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
 
