@@ -30,31 +30,36 @@ pokemons = gets.split(' ')
 if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
   p exit
 end
+start_p = pokemons[0]
+end_p = pokemons[1]
+
 # 開始、終了のポケモンを除外する
-pokemon_list = pokemon_list.reject {|v| v == pokemons[0]}
-pokemon_list = pokemon_list.reject {|v| v == pokemons[1]}
-target_p = pokemons[0]
+pokemon_list = pokemon_list.reject {|v| v == start_p}
+pokemon_list = pokemon_list.reject {|v| v == end_p}
+
+target_p = start_p
+puts target_p
 
 # しりとり開始
 for i in 0...10
+  # Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
+
   pokemon_list2 = pokemon_list.reject {|v| v[0] != target_p[-1]}
-  puts target_p
+  count = pokemon_list2.count
+  if count == 0
+    puts "test1"
+    break
+  end
+
   puts JSON.pretty_generate(pokemon_list2.uniq)
-  target_p = pokemon_list2[rand(0...pokemon_list2.count)]
+  target_p = pokemon_list2[rand(0...count)]
+  puts target_p
+  if target_p == end_p
+    puts "test2"
+    break
+  end
 end
 
-# Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
-
-# Todo 開始ポケモンの最後の文字を、最初とするポケモンを探し出す
-# Todo これを終了ポケモンになるまで繰り返す
 # Todo　終了ポケモンになったら、そのパターンを保持する
 # Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
 # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
-
-=begin	
-File.open("pokemon_names.json", mode = "w"){|f|
-  f.write(list)
-}
-=end
-
-
