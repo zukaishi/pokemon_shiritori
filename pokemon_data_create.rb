@@ -48,12 +48,6 @@ for i in 0...10
     last_str =  target_p[-2]
   end
 
-  # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
-  if end_p[0] == last_str
-    puts "test1"
-    break;
-  end
-
   # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
   pokemon_list2 = pokemon_list.reject {|v| v[0] != last_str}
   count = pokemon_list2.count
@@ -63,13 +57,17 @@ for i in 0...10
   end
 
   puts JSON.pretty_generate(pokemon_list2.uniq)
+  # ターゲットを決める
   target_p = pokemon_list2[rand(0...count)]
+
   # 対象となったポケモンを大元のリストから除外する
   pokemon_list = pokemon_list.reject {|v| v == target_p}
   puts target_p
-  if target_p == end_p
-    puts "test3"
-    break
+
+  # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
+  if end_p[0] == last_str
+    puts "end"
+    break;
   end
 end
 
