@@ -42,17 +42,23 @@ puts target_p
 
 # しりとり開始
 for i in 0...10
-  # Todo 伸ばし棒は、棒の一つ前の文字を最後の文字として考える処理
+  # 最後の伸ばし棒が最後にある場合一つ前の文字を最後の文字とする
   last_str =  target_p[-1]
   if last_str == "ー"
     last_str =  target_p[-2]
+  end
+
+  # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
+  if end_p[0] == last_str
+    puts "test1"
+    break;
   end
 
   # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
   pokemon_list2 = pokemon_list.reject {|v| v[0] != last_str}
   count = pokemon_list2.count
   if count == 0
-    puts "test1"
+    puts "test2"
     break
   end
 
@@ -60,7 +66,7 @@ for i in 0...10
   target_p = pokemon_list2[rand(0...count)]
   puts target_p
   if target_p == end_p
-    puts "test2"
+    puts "test3"
     break
   end
 end
