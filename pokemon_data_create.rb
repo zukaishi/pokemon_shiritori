@@ -64,6 +64,8 @@ for i in 0...10
 
   puts JSON.pretty_generate(pokemon_list2.uniq)
   target_p = pokemon_list2[rand(0...count)]
+  # 対象となったポケモンを大元のリストから除外する
+  pokemon_list = pokemon_list.reject {|v| v == target_p}
   puts target_p
   if target_p == end_p
     puts "test3"
