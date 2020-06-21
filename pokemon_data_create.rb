@@ -21,6 +21,8 @@ pokemon_list.map!{|x| x.rindex("ィ")? x.gsub("ィ","イ") : x}
 pokemon_list.map!{|x| x.rindex("ゥ")? x.gsub("ゥ","ウ") : x}
 pokemon_list.map!{|x| x.rindex("ェ")? x.gsub("ェ","エ") : x}
 pokemon_list.map!{|x| x.rindex("ォ")? x.gsub("ォ","オ") : x}
+pokemon_list.map!{|x| x.rindex("ュ")? x.gsub("ュ","ユ") : x}
+pokemon_list.map!{|x| x.rindex("ャ")? x.gsub("ャ","ヤ") : x}
 #puts JSON.pretty_generate(pokemon_list.uniq)
 
 # 開始、終了となるポケモンの名前を受け取る
@@ -41,7 +43,7 @@ target_p = start_p
 puts target_p
 
 # しりとり開始
-for i in 0...10
+for i in 0...pokemon_list.count
   # 最後の伸ばし棒が最後にある場合一つ前の文字を最後の文字とする
   last_str =  target_p[-1]
   if last_str == "ー"
@@ -56,7 +58,8 @@ for i in 0...10
     break
   end
 
-  puts JSON.pretty_generate(pokemon_list2.uniq)
+  # 候補一覧を表示する
+  #puts JSON.pretty_generate(pokemon_list2.uniq)
   # ターゲットを決める
   target_p = pokemon_list2[rand(0...count)]
 
@@ -66,6 +69,8 @@ for i in 0...10
 
   # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
   if end_p[0] == last_str
+    puts end_p
+    puts last_str
     puts "end"
     break;
   end
