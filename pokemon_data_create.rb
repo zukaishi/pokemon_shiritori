@@ -43,10 +43,10 @@ pokemon_list = pokemon_list.reject {|v| v == end_p}
 
 # スタートポケモンを操作用の変数に格納
 target_p = start_p
+puts "start"
 
 # しりとり開始
 for i in 0...pokemon_list.count
-
   puts target_p
 
   # 最後の伸ばし棒が最後にある場合一つ前の文字を最後の文字とする
@@ -59,7 +59,7 @@ for i in 0...pokemon_list.count
   pokemon_list2 = pokemon_list.reject {|v| v[0] != last_str}
   count = pokemon_list2.count
   if count == 0
-    puts "test2"
+    puts "### しりとり負け ###"
     break
   end
 
