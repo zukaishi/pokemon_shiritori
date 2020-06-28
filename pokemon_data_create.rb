@@ -74,8 +74,8 @@ for i in 0...pokemon_list.count
 
   # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
   if end_p[0] == last_str
-    # puts end_p
-    puts last_str
+    puts end_p
+    # puts last_str
     puts "end"
     break;
   end
