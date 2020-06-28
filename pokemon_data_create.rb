@@ -41,11 +41,14 @@ pokemon_list.map!{|x| x.rindex("ョ")? x.gsub("ョ","ヨ") : x}
 pokemon_list = pokemon_list.reject {|v| v == start_p}
 pokemon_list = pokemon_list.reject {|v| v == end_p}
 
+# スタートポケモンを操作用の変数に格納
 target_p = start_p
-puts target_p
 
 # しりとり開始
 for i in 0...pokemon_list.count
+
+  puts target_p
+
   # 最後の伸ばし棒が最後にある場合一つ前の文字を最後の文字とする
   last_str =  target_p[-1]
   if last_str == "ー"
@@ -67,11 +70,11 @@ for i in 0...pokemon_list.count
 
   # 対象となったポケモンを大元のリストから除外する
   pokemon_list = pokemon_list.reject {|v| v == target_p}
-  puts target_p
+
 
   # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
   if end_p[0] == last_str
-    puts end_p
+    # puts end_p
     puts last_str
     puts "end"
     break;
