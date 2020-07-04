@@ -10,13 +10,13 @@ require 'nokogiri'
 require 'json'
 require 'optparse'
 
-
+shirotori_mode = true
 opt = OptionParser.new
 opt.on('-s', '--search', 'add an item') {
-  puts 'serach' 
+  puts 'serach'
+  shirotori_mode = false
 }
 opt.parse(ARGV)
-
 
 # wikiからポケモン一覧を取得する
 DATA_URL="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7"
@@ -30,14 +30,20 @@ pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
 #puts JSON.pretty_generate(pokemon_list.uniq)
 
 # 開始、終了となるポケモンの名前を受け取る
-puts "ポケモン２匹を半角スペース区切りで入力してください"
-pokemons = STDIN.gets.split(' ')
-# 入力されたポケモンが存在するか
-if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
-  p exit
+if shirotori_mode 
+  puts "ポケモン２匹を半角スペース区切りで入力してください"
+  pokemons = STDIN.gets.split(' ')
+  # 入力されたポケモンが存在するか
+  if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
+    p exit
+  end
+  start_p = pokemons[0]
+  end_p = pokemons[1]
+else
+  puts "検索したい最初の文字を１文字入力してください"
+  serach_word = STDIN.gets
+  p serach_word
 end
-start_p = pokemons[0]
-end_p = pokemons[1]
 
 # Todo 一行で完了させる
 pokemon_list.map!{|x| x.rindex("♂")? x.gsub("♂","オス") : x}
