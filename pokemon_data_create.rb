@@ -1,7 +1,22 @@
+# how to use 
+# しりとりモード
+# ruby pokemon_data_create.rb 
+# 検索モード
+# ruby pokemon_data_create.rb -s
+
 require 'uri'
 require 'open-uri'
 require 'nokogiri'
 require 'json'
+require 'optparse'
+
+
+opt = OptionParser.new
+opt.on('-s', '--search', 'add an item') {
+  puts 'serach' 
+}
+opt.parse(ARGV)
+
 
 # wikiからポケモン一覧を取得する
 DATA_URL="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7"
@@ -16,7 +31,7 @@ pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
 
 # 開始、終了となるポケモンの名前を受け取る
 puts "ポケモン２匹を半角スペース区切りで入力してください"
-pokemons = gets.split(' ')
+pokemons = STDIN.gets.split(' ')
 # 入力されたポケモンが存在するか
 if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
   p exit
@@ -81,6 +96,8 @@ for i in 0...pokemon_list.count
   end
 end
 
+# Todo オプションを渡して、しりとりモードか、検索モードできるように
+# Todo 検索モードの場合は、最初の文字か、最後の文字か選択できるようにして文字を一文字渡す形にする
 # Todo　終了ポケモンになったら、そのパターンを保持する
 # Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
 # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
