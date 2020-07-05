@@ -11,11 +11,19 @@ require 'json'
 require 'optparse'
 
 shirotori_mode = true
+search_pos = 0
 opt = OptionParser.new
-opt.on('-s', '--search', 'add an item') {
-  puts 'serach'
+opt.on('-s', '--start', 'add an item') {
+  puts '最初の文字検索モード'
   shirotori_mode = false
+  search_pos = 0
 }
+opt.on('-e', '--end', 'add an item') {
+  puts '最後の文字検索モード'
+  shirotori_mode = false
+  search_pos = -1
+}
+
 opt.parse(ARGV)
 
 # wikiからポケモン一覧を取得する
@@ -87,7 +95,6 @@ if shirotori_mode
     # 対象となったポケモンを大元のリストから除外する
     pokemon_list = pokemon_list.reject {|v| v == target_p}
 
-
     # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
     if end_p[0] == last_str
       puts end_p
@@ -96,17 +103,19 @@ if shirotori_mode
       break;
     end
   end
+
+  # Todo　終了ポケモンになったら、そのパターンを保持する
+  # Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
+  # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
+
 else
   puts "検索したい最初の文字を１文字入力してください"
   serach_word = STDIN.gets
   p serach_word
+  p search_pos
+
+  # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
+  # Todo この部分は共通化できる
+  pokemon_list2 = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
+  puts JSON.pretty_generate(pokemon_list2.uniq)
 end
-
-
-
-
-# Todo オプションを渡して、しりとりモードか、検索モードできるように
-# Todo 検索モードの場合は、最初の文字か、最後の文字か選択できるようにして文字を一文字渡す形にする
-# Todo　終了ポケモンになったら、そのパターンを保持する
-# Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
-# Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
