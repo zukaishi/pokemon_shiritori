@@ -10,6 +10,12 @@ require 'nokogiri'
 require 'json'
 require 'optparse'
 
+# wikiからポケモン一覧を取得する
+DATA_URL="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7"
+html = URI.open(DATA_URL).read
+doc = Nokogiri::HTML.parse(html)
+pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
+
 shirotori_mode = true
 search_pos = 0
 opt = OptionParser.new
@@ -23,17 +29,12 @@ opt.on('-e', '--end', 'add an item') {
   shirotori_mode = false
   search_pos = -1
 }
-
 opt.parse(ARGV)
 
-# wikiからポケモン一覧を取得する
-DATA_URL="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7"
-html = URI.open(DATA_URL).read
-doc = Nokogiri::HTML.parse(html)
-pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
-
-# ンで終わるポケモンを除外する
-pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
+if (shirotori_mode ){
+  # しりとりモードならンで終わるポケモンを除外する
+  pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
+}
 
 #puts JSON.pretty_generate(pokemon_list.uniq)
 
