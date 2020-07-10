@@ -31,25 +31,18 @@ opt.on('-e', '--end', 'add an item') {
 }
 opt.parse(ARGV)
 
-if (shirotori_mode ){
+if shirotori_mode
   # しりとりモードならンで終わるポケモンを除外する
   pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
+end
+
+str_map = { 
+  "♂" => "オス","♀" => "メス","ァ" => "ア","ィ" => "イ","ゥ" => "ウ","ェ" => "エ","ォ" => "オ","ュ" => "ユ","ャ" => "ヤ","ョ" => "ヨ"
 }
-
+str_map.each do | key, value|
+  pokemon_list.map!{|x| x.rindex( key )? x.gsub(key,value ) : x}
+end
 #puts JSON.pretty_generate(pokemon_list.uniq)
-
-# Todo 一行で完了させる
-pokemon_list.map!{|x| x.rindex("♂")? x.gsub("♂","オス") : x}
-pokemon_list.map!{|x| x.rindex("♀")? x.gsub("♀","メス") : x}
-# 捨て仮名を普通のカタカナ変換
-pokemon_list.map!{|x| x.rindex("ァ")? x.gsub("ァ","ア") : x}
-pokemon_list.map!{|x| x.rindex("ィ")? x.gsub("ィ","イ") : x}
-pokemon_list.map!{|x| x.rindex("ゥ")? x.gsub("ゥ","ウ") : x}
-pokemon_list.map!{|x| x.rindex("ェ")? x.gsub("ェ","エ") : x}
-pokemon_list.map!{|x| x.rindex("ォ")? x.gsub("ォ","オ") : x}
-pokemon_list.map!{|x| x.rindex("ュ")? x.gsub("ュ","ユ") : x}
-pokemon_list.map!{|x| x.rindex("ャ")? x.gsub("ャ","ヤ") : x}
-pokemon_list.map!{|x| x.rindex("ョ")? x.gsub("ョ","ヨ") : x}
 
 # 開始、終了となるポケモンの名前を受け取る
 if shirotori_mode 
