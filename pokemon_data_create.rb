@@ -10,6 +10,7 @@ require 'nokogiri'
 require 'json'
 require 'optparse'
 
+# todo ローカルにファイルを保存して使えるようにする
 # wikiからポケモン一覧を取得する
 DATA_URL="https://wiki.xn--rckteqa2e.com/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E4%B8%80%E8%A6%A7"
 html = URI.open(DATA_URL).read
@@ -44,8 +45,9 @@ str_map.each do | key, value|
 end
 #puts JSON.pretty_generate(pokemon_list.uniq)
 
-# 開始、終了となるポケモンの名前を受け取る
 if shirotori_mode 
+  # しりとりモード
+  # 開始、終了となるポケモンの名前を受け取る
   puts "ポケモン２匹を半角スペース区切りで入力してください"
   pokemons = STDIN.gets.split(' ')
   # 入力されたポケモンが存在するか
@@ -92,7 +94,6 @@ if shirotori_mode
     # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
     if end_p[0] == last_str
       puts end_p
-      # puts last_str
       puts "end"
       break;
     end
@@ -103,6 +104,7 @@ if shirotori_mode
   # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
 
 else
+  # 検索モード
   puts "検索したい最初の文字を１文字入力してください"
   serach_word = STDIN.gets
   p serach_word
