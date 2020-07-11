@@ -37,10 +37,7 @@ if shirotori_mode
   pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
 end
 
-str_map = { 
-  "♂" => "オス","♀" => "メス","ァ" => "ア","ィ" => "イ","ゥ" => "ウ","ェ" => "エ","ォ" => "オ","ュ" => "ユ","ャ" => "ヤ","ョ" => "ヨ"
-}
-str_map.each do | key, value|
+{"♂"=>"オス","♀"=>"メス","ァ"=>"ア","ィ"=>"イ","ゥ"=>"ウ","ェ"=>"エ","ォ"=>"オ","ュ"=>"ユ","ャ"=>"ヤ","ョ"=>"ヨ"}.each do | key, value|
   pokemon_list.map!{|x| x.rindex( key )? x.gsub(key,value ) : x}
 end
 #puts JSON.pretty_generate(pokemon_list.uniq)
