@@ -1,8 +1,10 @@
 # how to use 
 # しりとりモード
 # ruby pokemon_data_create.rb 
-# 検索モード
+# 検索モード 最初の文字
 # ruby pokemon_data_create.rb -s
+# 検索モード 最後の文字
+# ruby pokemon_data_create.rb -e
 
 require 'uri'
 require 'open-uri'
