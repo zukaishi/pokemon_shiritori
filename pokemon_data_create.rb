@@ -1,5 +1,4 @@
 # Todo 関数分けする
-# Todo -h or --help 使い方表示
 # Todo　終了ポケモンになったら、そのパターンを保持する
 # Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
 # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
@@ -10,9 +9,13 @@ require 'open-uri'
 require 'nokogiri'
 require 'json'
 require 'optparse'
+require './utils/help'
+
+opt = OptionParser.new
+optHelp(opt)
 
 # ポケモン一覧を取得する
-pokemon_data_file = "pokemon_list.csv"
+pokemon_data_file = "./data/pokemon_list.csv"
 if File.exist?(pokemon_data_file)
   f = File.open(pokemon_data_file)
     html = f.read 
@@ -30,17 +33,6 @@ pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2
 # モードを決定
 shirotori_mode = true
 search_pos = 0
-opt = OptionParser.new
-opt.on('-h', '--help', 'add an item') {
-  puts 'how to use '
-  puts 'しりとりモード'
-  puts 'ruby pokemon_data_create.rb '
-  puts '検索モード 最初の文字 '
-  puts 'ruby pokemon_data_create.rb -s'
-  puts '検索モード 最後の文字 '
-  puts 'ruby pokemon_data_create.rb -e'
-  exit
-}
 opt.on('-s', '--start', 'add an item') {
   puts '最初の文字検索モード'
   shirotori_mode = false
@@ -126,3 +118,4 @@ else
   pokemon_list2 = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
   puts JSON.pretty_generate(pokemon_list2.uniq)
 end
+
