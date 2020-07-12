@@ -1,10 +1,9 @@
-# how to use 
-# しりとりモード
-# ruby pokemon_data_create.rb 
-# 検索モード 最初の文字
-# ruby pokemon_data_create.rb -s
-# 検索モード 最後の文字
-# ruby pokemon_data_create.rb -e
+# Todo 関数分けする
+# Todo -h or --help 使い方表示
+# Todo　終了ポケモンになったら、そのパターンを保持する
+# Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
+# Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
+# Todo 処理の共通化
 
 require 'uri'
 require 'open-uri'
@@ -32,6 +31,16 @@ pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2
 shirotori_mode = true
 search_pos = 0
 opt = OptionParser.new
+opt.on('-h', '--help', 'add an item') {
+  puts 'how to use '
+  puts 'しりとりモード'
+  puts 'ruby pokemon_data_create.rb '
+  puts '検索モード 最初の文字 '
+  puts 'ruby pokemon_data_create.rb -s'
+  puts '検索モード 最後の文字 '
+  puts 'ruby pokemon_data_create.rb -e'
+  exit
+}
 opt.on('-s', '--start', 'add an item') {
   puts '最初の文字検索モード'
   shirotori_mode = false
@@ -106,11 +115,6 @@ if shirotori_mode
       break;
     end
   end
-
-  # Todo　終了ポケモンになったら、そのパターンを保持する
-  # Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
-  # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
-
 else
   # 検索モード
   puts "検索したい最初の文字を１文字入力してください"
@@ -119,7 +123,6 @@ else
   p search_pos
 
   # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
-  # Todo この部分は共通化できる
   pokemon_list2 = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
   puts JSON.pretty_generate(pokemon_list2.uniq)
 end
