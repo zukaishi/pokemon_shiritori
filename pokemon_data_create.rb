@@ -3,10 +3,6 @@
 # Todo パターンを変えて、再度検索を行い、保持していたパターンより数が少なければ置き換え
 # Todo もっとも最短となるパターンが残るはずなので、そのパターンを配列を表示して完了
 # Todo 処理の共通化
-
-require 'uri'
-require 'open-uri'
-require 'nokogiri'
 require 'json'
 require 'optparse'
 require './utils/help'

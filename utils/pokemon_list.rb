@@ -1,4 +1,8 @@
 # utils/pokemon_list.rb
+require 'uri'
+require 'open-uri'
+require 'nokogiri'
+
 def pokemon_list()
     # ポケモン一覧を取得する
     pokemon_data_file = "./data/pokemon_list.csv"
@@ -13,5 +17,5 @@ def pokemon_list()
         }
     end
     doc = Nokogiri::HTML.parse(html)
-    pokemon_list = doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
+    return doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
 end
