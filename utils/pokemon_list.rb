@@ -3,7 +3,7 @@ require 'uri'
 require 'open-uri'
 require 'nokogiri'
 
-def pokemon_list()
+def pokemon_list(shirotori_mode)
     # ポケモン一覧を取得する
     pokemon_data_file = "./data/pokemon_list.csv"
     if File.exist?(pokemon_data_file)
@@ -17,5 +17,16 @@ def pokemon_list()
         }
     end
     doc = Nokogiri::HTML.parse(html)
-    return doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
+    pokemon_list =  doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
+
+    if shirotori_mode
+        # しりとりモードならンで終わるポケモンを除外する
+        pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
+    end
+
+    {"♂"=>"オス","♀"=>"メス","ァ"=>"ア","ィ"=>"イ","ゥ"=>"ウ","ェ"=>"エ","ォ"=>"オ","ュ"=>"ユ","ャ"=>"ヤ","ョ"=>"ヨ"}.each do | key, value|
+        pokemon_list.map!{|x| x.rindex( key )? x.gsub(key,value ) : x}
+    end
+    #puts JSON.pretty_generate(pokemon_list.uniq)
+    return pokemon_list
 end
