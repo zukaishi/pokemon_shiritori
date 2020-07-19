@@ -10,5 +10,5 @@ def optHelp(opt)
       puts 'ruby pokemon_data_create.rb -e'
       exit
     }
-  end
+end
   
