@@ -1,4 +1,5 @@
 # utils/pokemon_list.rb
+require 'json'
 require 'uri'
 require 'open-uri'
 require 'nokogiri'

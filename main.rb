@@ -1,4 +1,3 @@
-require 'json'
 require 'optparse'
 require './utils/help'
 require './utils/mode'
@@ -25,6 +24,6 @@ else
   puts "検索したい最初の文字を１文字入力してください"
   serach_word = STDIN.gets
   # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
-  pokemon_list2 = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
-  puts JSON.pretty_generate(pokemon_list2.uniq)
+  pokemon_list = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
+  p pokemon_list.uniq
 end

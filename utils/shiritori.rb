@@ -1,10 +1,11 @@
-
 # utils/shiritori.rb
+require 'json'
+
 def shiritori(pokemon_list,start_p,end_p)
     {"♂"=>"オス","♀"=>"メス","ァ"=>"ア","ィ"=>"イ","ゥ"=>"ウ","ェ"=>"エ","ォ"=>"オ","ュ"=>"ユ","ャ"=>"ヤ","ョ"=>"ヨ"}.each do | key, value|
       pokemon_list.map!{|x| x.rindex( key )? x.gsub(key,value ) : x}
     end
-    # puts JSON.pretty_generate(pokemon_list.uniq)
+    # p JSON.pretty_generate(pokemon_list.uniq)
   
     # 開始、終了のポケモンを除外する
     pokemon_list = pokemon_list.reject {|v| v == start_p}
@@ -12,7 +13,7 @@ def shiritori(pokemon_list,start_p,end_p)
   
     # スタートポケモンを操作用の変数に格納
     target_p = start_p
-    puts "start"
+    p "start"
 
     # しりとり開始
     for i in 0...pokemon_list.count
@@ -28,12 +29,12 @@ def shiritori(pokemon_list,start_p,end_p)
         pokemon_list2 = pokemon_list.reject {|v| v[0] != last_str}
         count = pokemon_list2.count
         if count == 0
-            puts "### しりとり負け ###"
+            p "### しりとり負け ###"
             break
         end
 
         # 候補一覧を表示する
-        #puts JSON.pretty_generate(pokemon_list2.uniq)
+        #p JSON.pretty_generate(pokemon_list2.uniq)
         # ターゲットを決める
         target_p = pokemon_list2[rand(0...count)]
 
