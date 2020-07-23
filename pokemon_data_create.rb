@@ -19,12 +19,18 @@ if shirotori_mode
   # 開始、終了となるポケモンの名前を受け取る
   puts "ポケモン２匹を半角スペース区切りで入力してください"
   pokemons = STDIN.gets.split(' ')
+
   # 入力されたポケモンが存在するか
   if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
     p exit
   end
   start_p = pokemons[0]
   end_p = pokemons[1]
+
+  {"♂"=>"オス","♀"=>"メス","ァ"=>"ア","ィ"=>"イ","ゥ"=>"ウ","ェ"=>"エ","ォ"=>"オ","ュ"=>"ユ","ャ"=>"ヤ","ョ"=>"ヨ"}.each do | key, value|
+    pokemon_list.map!{|x| x.rindex( key )? x.gsub(key,value ) : x}
+  end
+  # puts JSON.pretty_generate(pokemon_list.uniq)
 
   # 開始、終了のポケモンを除外する
   pokemon_list = pokemon_list.reject {|v| v == start_p}
