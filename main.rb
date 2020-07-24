@@ -27,7 +27,7 @@ if shirotori_mode
   shiritori(pokemon_list,pokemons[0],pokemons[1])
 else
   # 検索モード
-  puts "検索したい最初の文字を１文字入力してください"
+  p "検索したい最初の文字を１文字入力してください"
   serach_word = STDIN.gets
 
   # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
