@@ -1,5 +1,4 @@
 # utils/pokemon_list.rb
-require 'json'
 require 'uri'
 require 'open-uri'
 require 'nokogiri'
@@ -20,9 +19,7 @@ def pokemon_list(shirotori_mode)
     doc = Nokogiri::HTML.parse(html)
     pokemon_list =  doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
 
-    {"♂"=>"オス","♀"=>"メス","ァ"=>"ア","ィ"=>"イ","ゥ"=>"ウ","ェ"=>"エ","ォ"=>"オ","ュ"=>"ユ","ャ"=>"ヤ","ョ"=>"ヨ"}.each do | key, value|
-        pokemon_list.map!{|x| x.rindex( key )? x.gsub(key,value ) : x}
-    end
+    pokemon_list = sutegana(pokemon_list)
     if shirotori_mode
         # しりとりモードならンで終わるポケモンを除外する
         pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}
