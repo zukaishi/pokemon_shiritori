@@ -1,4 +1,5 @@
 require 'optparse'
+require 'json'
 require './utils/help'
 require './utils/mode'
 require './utils/pokemon_list'
@@ -11,10 +12,11 @@ pokemon_list = pokemon_list(shirotori_mode)
 
 if shirotori_mode 
   # 開始、終了となるポケモンの名前を受け取る
-  puts "ポケモン２匹を半角スペース区切りで入力してください"
+  p "ポケモン２匹を半角スペース区切りで入力してください"
   pokemons = STDIN.gets.split(' ')
   # 入力されたポケモンが存在するか
   if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
+    p "存在しないポケモンが入力されました"
     exit
   end
   # Todo　何度か実行を繰り返しもっとも最短でいけるパターンを最終回等とする
