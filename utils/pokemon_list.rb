@@ -19,7 +19,6 @@ def pokemon_list(shirotori_mode)
     doc = Nokogiri::HTML.parse(html)
     pokemon_list =  doc.css('.mw-parser-output table.sortable tbody tr td:nth-child(2)>a').map(&:content)
 
-    pokemon_list = sutegana(pokemon_list)
     if shirotori_mode
         # しりとりモードならンで終わるポケモンを除外する
         pokemon_list = pokemon_list.reject {|v| v[-1] == "ン"}

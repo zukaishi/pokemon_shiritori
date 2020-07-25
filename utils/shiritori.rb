@@ -1,9 +1,5 @@
 # utils/shiritori.rb
 def shiritori(pokemon_list,start_p,end_p)  
-    # 開始、終了のポケモンを除外する
-    pokemon_list = pokemon_list.reject {|v| v == start_p}
-    pokemon_list = pokemon_list.reject {|v| v == end_p} 
-  
     # スタートポケモンを操作用の変数に格納
     target_p = start_p
     p "start"

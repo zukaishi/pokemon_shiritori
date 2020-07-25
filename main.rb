@@ -17,11 +17,15 @@ if shirotori_mode
   pokemons = STDIN.gets.split(' ')
 
   # 入力されたポケモンが存在するか
-  pokemons = sutegana(pokemons)
-  if !pokemon_list.rindex( pokemons[0] ) or !pokemon_list.rindex( pokemons[1] ) then
-    p "存在しないポケモンが入力されました"
-    exit
+  for i in 0..1 do
+    if !pokemon_list.rindex( pokemons[i] ) then
+      p "#{i+1}個目に入力された#{pokemons[i]}は存在しません"
+      exit
+    end
+    # 入力されたポケモンを除外する
+    pokemon_list = pokemon_list.reject {|v| v == pokemons[i]}
   end
+  pokemons = sutegana(pokemons)
 
   # Todo　何度か実行を繰り返しもっとも最短でいけるパターンを最終回等とする
   shiritori(pokemon_list,pokemons[0],pokemons[1])
