@@ -25,6 +25,8 @@ if shirotori_mode
     # 入力されたポケモンを除外する
     pokemon_list = pokemon_list.reject {|v| v == pokemons[i]}
   end
+
+  # 捨て仮名（例えば、「ァ」なら、「ア」）を通常の大文字のカタカナに変換ししりとりで扱いやすくする
   pokemons = sutegana(pokemons)
 
   # Todo　何度か実行を繰り返しもっとも最短でいけるパターンを最終回等とする
