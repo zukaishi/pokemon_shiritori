@@ -28,6 +28,7 @@ if shirotori_mode
 
   # 捨て仮名（例えば、「ァ」なら、「ア」）を通常の大文字のカタカナに変換ししりとりで扱いやすくする
   pokemons = sutegana(pokemons)
+  pokemon_list = sutegana(pokemon_list)
 
   # しりとり開始
   shiritori(pokemon_list,pokemons[0],pokemons[1])

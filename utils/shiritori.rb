@@ -6,7 +6,7 @@ def shiritori(pokemon_list,start_p,end_p)
 
     # しりとり開始
     for i in 0...pokemon_list.count
-        puts target_p
+        p target_p
 
         # 最後の伸ばし棒が最後にある場合一つ前の文字を最後の文字とする
         last_str =  target_p[-1]
@@ -32,8 +32,8 @@ def shiritori(pokemon_list,start_p,end_p)
 
         # 終了ポケモンの最初の文字と、最後の文字が一致してた場合しりとり終了
         if end_p[0] == last_str
-            puts end_p
-            puts "end"
+            p end_p
+            p "end"
             break;
         end
     end
