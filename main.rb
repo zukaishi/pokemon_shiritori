@@ -30,12 +30,15 @@ if shirotori_mode
   pokemons = sutegana(pokemons)
   pokemon_list = sutegana(pokemon_list)
 
-  # しりとり開始
-  p "start"
-  result_list = shiritori(pokemon_list,pokemons[0],pokemons[1])
-  p result_list
-  p result_list.size
-  p "end"
+  # しりとりを件数分実行する
+  try_count = 10
+  for i in 0..try_count do
+    p "start"
+    result_list = shiritori(pokemon_list,pokemons[0],pokemons[1])
+    p result_list
+    p result_list.size
+    p "end"
+  end
 else
   # 検索モード
   p "検索したい最初の文字を１文字入力してください"
