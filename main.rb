@@ -45,6 +45,13 @@ else
   serach_word = STDIN.gets
 
   # 全体のリストから最初の文字が対象の最後の文字と一致するものを探し出してリストを作る
-  pokemon_list = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
+  #pokemon_list = pokemon_list.reject {|v| v[search_pos] != serach_word.chomp}
+  if search_pos == 0
+    pokemon_list = pokemon_list.reject {|v|  v.index(serach_word.chomp) != 0}
+  elsif search_pos == -1 
+    pokemon_list = pokemon_list.reject {|v|  v.rindex(serach_word.chomp) != 0}
+  elsif search_pos == 1 
+    pokemon_list = pokemon_list.reject {|v|  v.include?(serach_word.chomp)}
+  end
   p pokemon_list.uniq
 end

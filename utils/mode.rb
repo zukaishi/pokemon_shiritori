@@ -13,6 +13,11 @@ def modeSelect(opt)
         shirotori_mode = false
         search_pos = -1
     }
+    opt.on('-m', '--middle', 'add an item') {
+        puts '中間文字検索モード'
+        shirotori_mode = false
+        search_pos = 1
+    }
     opt.parse(ARGV)
     return shirotori_mode,search_pos
 end
