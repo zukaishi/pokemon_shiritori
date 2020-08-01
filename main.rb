@@ -51,7 +51,7 @@ else
   elsif search_pos == -1 
     pokemon_list = pokemon_list.reject {|v|  v.rindex(serach_word.chomp) != 0}
   elsif search_pos == 1 
-    pokemon_list = pokemon_list.reject {|v|  v.include?(serach_word.chomp)}
+    pokemon_list = pokemon_list.reject {|v|  v.include?(serach_word.chomp) != true}
   end
   p pokemon_list.uniq
 end
