@@ -18,12 +18,12 @@ if shirotori_mode
 
   # 入力されたポケモンが存在するか
   for i in 0..1 do
-    if !pokemon_list.rindex( pokemons[i] ) then
+    if !pokemon_list.value?( pokemons[i] ) then
       p "#{i+1}個目に入力された#{pokemons[i]}は存在しません"
       exit
     end
     # 入力されたポケモンを除外する
-    pokemon_list = pokemon_list.reject {|v| v == pokemons[i]}
+    pokemon_list.delete_if{|k, v|  v == pokemons[i]}
   end
 
   # 捨て仮名（例えば、「ァ」なら、「ア」）を通常の大文字のカタカナに変換ししりとりで扱いやすくする
