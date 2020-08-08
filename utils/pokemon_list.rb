@@ -24,10 +24,5 @@ def pokemon_list(shirotori_mode)
     pokemon_no_list.each do |i|
         pokemon_list[pokemon_no_list[i.to_i].to_i] = pokemon_name_list[i.to_i]
     end
-    if shirotori_mode
-        # しりとりモードならンで終わるポケモンを除外する
-        pokemon_list.delete_if{|k, v|  v[-1] == "ン" }
-    end
-    #puts JSON.pretty_generate(pokemon_list.uniq)
     return pokemon_list
 end

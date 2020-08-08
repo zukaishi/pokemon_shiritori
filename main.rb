@@ -12,6 +12,9 @@ shirotori_mode, search_pos = modeSelect(opt)
 pokemon_list = pokemon_list(shirotori_mode)
 
 if shirotori_mode 
+  # ん、で終わるポケモンを除外
+  pokemon_list.delete_if{|k, v|  v[-1] == "ン" }
+
   # 開始、終了となるポケモンの名前を受け取る
   p "ポケモン２匹を半角スペース区切りで入力してください"
   pokemons = STDIN.gets.split(' ')
