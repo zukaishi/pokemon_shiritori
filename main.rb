@@ -34,7 +34,7 @@ if shirotori_mode
   pokemon_list = sutegana(pokemon_list)
 
   # しりとりを件数分実行する
-  try_count = 10
+  try_count = 1
   for i in 0..try_count do
     p "start"
     result_list = shiritori(pokemon_list,pokemons[0],pokemons[1])
