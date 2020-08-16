@@ -18,7 +18,6 @@ if shirotori_mode
   # 開始、終了となるポケモンの名前を受け取る
   p "ポケモン２匹を半角スペース区切りで入力してください"
   pokemons = STDIN.gets.split(' ')
-
   # 入力されたポケモンが存在するか
   for i in 0..1 do
     if !pokemon_list.value?( pokemons[i] ) then
@@ -26,7 +25,8 @@ if shirotori_mode
       exit
     end
     # 入力されたポケモンを除外する
-    pokemon_list.delete_if{|k, v|  v == pokemons[i]}
+    pokemon = pokemon_list.find{|k,v| v == pokemons[i]}
+    pokemon_list.delete_if{|k, v|  k == pokemon[0]}
   end
 
   # 捨て仮名（例えば、「ァ」なら、「ア」）を通常の大文字のカタカナに変換ししりとりで扱いやすくする
