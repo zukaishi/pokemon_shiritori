@@ -6,7 +6,6 @@
 ### Todo ポケモンのIDでもできるようにしたい
 ### Todo 濁音考慮せずしりとりを継続するモードを追加 例）ダ　→  タ or ダ
 
-
 ## how to use 
 しりとりモード
 ruby pokemon_data_create.rb 
